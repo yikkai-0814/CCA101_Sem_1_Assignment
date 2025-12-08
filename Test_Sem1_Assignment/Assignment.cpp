@@ -129,8 +129,11 @@ int recalculatePoints(string user_id[], string review_user_id[], int current_poi
 }
 
 // Create function to update membership category
-void updateMembershipCategory(string user_id[], string membership_category[], int current_points[], int num_user){
+void updateMembershipCategory(string user_id[], string membership_category[], int current_points[], int num_user, string copy_membership_category[], string username[]){
     
+    // Initialize boolean status for membership category upgrade status
+    bool membership_update = false;
+
     // Update membership category based on the updated points
     for (int i=0; i<num_user; i++){
         
@@ -145,6 +148,38 @@ void updateMembershipCategory(string user_id[], string membership_category[], in
         }
         else{
             membership_category[i] = "Platinum";
+        }
+
+        if(membership_category[i] != copy_membership_category[i]){
+            membership_update = true;
+        }
+    }
+
+     if (membership_update){
+        // Title in cyan
+        cout << "\033[1;36m\n========================== Membership Upgrades ===========================\033[0m" << endl << endl;
+
+        // Header in yellow
+        cout << "\033[1;33m"; // Bright yellow
+        cout << left
+             << setw(10) << "UserID"
+             << setw(20) << "Username"
+             << setw(15) << "Old Category"
+             << setw(15) << "New Category"
+             << setw(15) << "Current Points" << endl;
+        cout << "--------------------------------------------------------------------------" << endl;
+        cout << "\033[0m"; // Reset color
+
+        // Print upgraded members in green
+        for (int i = 0; i < num_user; i++) {
+            if (membership_category[i] != copy_membership_category[i]) {
+                cout << left
+                     << setw(10) << user_id[i]
+                     << setw(20) << username[i]
+                     << setw(15) << copy_membership_category[i]
+                     << setw(15) << membership_category[i]
+                     << setw(15) << current_points[i] << endl;
+            }
         }
     }
 
@@ -254,8 +289,8 @@ void displaySpecificUserReview(string user_id[], string user_name[], string revi
         << setw(10) << "UserID" 
         << setw(15) << "Username" 
         << setw(20) << "Review Rating" 
-        << setw(45) << "Review Statement" 
-        << setw(30) << "Hotel Name" << endl;
+        << setw(25) << "Hotel Name" 
+        << setw(50) << "Review Statement" << endl;
 
         // Loop to find the review based on review user id
         for (int i=0 ; i< num_review; i++){
@@ -269,8 +304,8 @@ void displaySpecificUserReview(string user_id[], string user_name[], string revi
                 << setw(10) << review_user_id[i] 
                 << setw(15) << username // need to compare review_user_id with user_id
                 << setw(20) << review_rating[i] 
-                << setw(45) << review_statement[i] 
-                << setw(30) << review_hotel_name[i] << endl;
+                << setw(25) << review_hotel_name[i]  
+                << setw(50) << review_statement[i]<< endl;
             }
         }
     }
@@ -721,11 +756,17 @@ int addNewReview(int num_review, int num_user, string review_user_id[], string u
     return number_hotel;
 }
 
+// Create function for additional features
+void additionalFeatures(){
+
+}
+
+
 int main(){
 
     // Create array for users.txt file
     string user_id[MAX_USERS], user_name[MAX_USERS], country[MAX_USERS], state[MAX_USERS], email[MAX_USERS], membership_category[MAX_USERS];
-    int current_points[MAX_USERS], count_review[MAX_USERS], copy_current_points[MAX_USERS];
+    int current_points[MAX_USERS], count_review[MAX_USERS];
 
     // Create array for review.txt
     string review_user_id[MAX_REVIEWS], review_statement[MAX_REVIEWS], review_hotel_name[MAX_REVIEWS], hotel_name[MAX_REVIEWS];
@@ -743,8 +784,16 @@ int main(){
     // Call function to recalculate current points
     int total_points_awarded = recalculatePoints(user_id, review_user_id, current_points, number_word_review_statement, num_user, num_review);
 
+    // Copy array for membership uprade notification purpose
+    string copy_membership_category[MAX_USERS];
+
+    // Loop to copy the membership category
+    for (int i=0; i<num_user; i++){
+        copy_membership_category[i] = membership_category[i];
+    }
+
     // Call function to update membership category
-    updateMembershipCategory(user_id, membership_category, current_points, num_user);
+    updateMembershipCategory(user_id, membership_category, current_points, num_user, copy_membership_category, user_name);
 
     // Call function to find the number of hotel & record the unique hotel name
     int number_hotel = calculateNumHotel(review_hotel_name, num_review, hotel_name);
@@ -752,8 +801,9 @@ int main(){
     // Call function to calculate number of review and rating of a hotel
     calculateNumReviewHotel(review_hotel_name, review_rating, num_review, number_hotel, hotel_name, number_review_hotel, total_rating_hotel);
 
-    // Copy of array for sorting purpose
+    // Copy array for sorting purpose
     string copy_user_id[MAX_USERS], copy_user_name[MAX_USERS];
+    int copy_current_points[MAX_USERS];
 
     // Create menu-driven interface
     // Declare variables used for output features
@@ -761,27 +811,36 @@ int main(){
     string input_user_id , input_hotel_name;
 
     // Data Validation
-    while (choice != 11){
+    while (choice != 12){
 
         // Display Header
-        cout << "\033[95m====================== TRAVELGO MAIN MENU ======================\033[0m" << endl;
-        cout << "\033[94m[1]\033[0m  Display User Reviews" << endl;
-        cout << "\033[94m[2]\033[0m  Display Hotel Reviews" << endl;
-        cout << "\033[94m[3]\033[0m  User Information" << endl;
-        cout << "\033[94m[4]\033[0m  Positive Hotel Reviews" << endl;
-        cout << "\033[94m[5]\033[0m  Activity Summary" << endl;
-        cout << "\033[94m[6]\033[0m  Membership Categories" << endl;
-        cout << "\033[94m[7]\033[0m  Reviewer Leaderboard" << endl;
-        cout << "\033[94m[8]\033[0m  Top 3 Reviewers" << endl;
-        cout << "\033[94m[9]\033[0m  Hotel Rating Summary" << endl;
-        cout << "\033[94m[10]\033[0m Add Review" << endl;
-        cout << "\033[94m[11]\033[0m Save & Exit" << endl;
-        cout << "\033[95m================================================================\033[0m" << endl;
+        cout << "\033[1;95m\n====================== TRAVELGO MAIN MENU ======================\033[0m" << endl;
+        cout << "\033[1;94m[1]\033[0m  Display User Reviews" << endl;
+        cout << "\033[1;94m[2]\033[0m  Display Hotel Reviews" << endl;
+        cout << "\033[1;94m[3]\033[0m  User Information" << endl;
+        cout << "\033[1;94m[4]\033[0m  Positive Hotel Reviews" << endl;
+        cout << "\033[1;94m[5]\033[0m  Activity Summary" << endl;
+        cout << "\033[1;94m[6]\033[0m  Membership Categories" << endl;
+        cout << "\033[1;94m[7]\033[0m  Reviewer Leaderboard" << endl;
+        cout << "\033[1;94m[8]\033[0m  Top 3 Reviewers" << endl;
+        cout << "\033[1;94m[9]\033[0m  Hotel Rating Summary" << endl;
+        cout << "\033[1;94m[10]\033[0m Add Review" << endl;
+        cout << "\033[1;94m[11]\033[0m Additional Features" << endl;
+        cout << "\033[1;94m[12]\033[0m Save & Exit" << endl;
+        cout << "\033[1;95m================================================================\033[0m" << endl;
 
         cout << "Enter your choice: ";
         cin >> choice; 
         cin.ignore(); // there is a newline after the choice entered so we need to flush the buffer
     
+        // Input Data Validation
+        while (choice > 12){
+            cout << "\nInvalid Choice!\n";
+            cout << "Enter your choice: ";
+            cin >> choice; 
+            cin.ignore(); // there is a newline after the choice entered so we need to flush the buffer
+        }
+
         switch(choice){
 
             // Display All Reviews Written by a Specific User
@@ -904,10 +963,16 @@ int main(){
                     total_points_awarded += 100;
                 }
 
+                // Loop to copy the membership category
+                for (int i=0; i<num_user; i++){
+                    copy_membership_category[i] = membership_category[i];
+                }
+
                 // Call function to update the membership category based on the latest points
-                updateMembershipCategory(user_id, membership_category, current_points, num_user);
-                
+                updateMembershipCategory(user_id, membership_category, current_points, num_user, copy_membership_category, user_name);
                 break;
+
+                // Call Function to perform Additional Features
         }       
     }
 
@@ -930,6 +995,8 @@ int main(){
 
     // Close the output file stream object 
     updateUserFile.close();
+
+    // Rearrange the review position based on user id before save into the file
 
     // Update reviews.txt
     ofstream updateReviewFile; // Create a output file stream object for review.txt
