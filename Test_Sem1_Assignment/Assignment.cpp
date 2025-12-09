@@ -693,6 +693,14 @@ int addNewReview(int num_review, int num_user, string review_user_id[], string u
     cin >> input_rating;
     cin.ignore(); // Clear the buffer
 
+    // Input Data Validation
+    while (input_rating < 0 || input_rating > 5){
+        cout << "\033[1;91m" << "Invalid Input for Rating.\nPlease make your input again!\n\n" << "\033[0m"; // Display message in red colours and reset it at the end
+        cout << "Enter Rating: ";
+        cin >> input_rating;
+        cin.ignore(); // Clear the buffer
+    }
+
 
     // Determine whether the input user id is exist in the user list 
     for (int i=0; i<num_user ; i++){
@@ -706,7 +714,7 @@ int addNewReview(int num_review, int num_user, string review_user_id[], string u
     // Input Validation
     while (user_status != true){
 
-        cout << "User is not found in the user list.\n";
+        cout << "\033[1;91m" << "\nUser is not found in the user list!\nPlease make your input again!\n\n" << "\033[0m"; // Display message in red colour and reset it at the end
         
         cout << "Enter UserID: ";
         cin >> input_user_id;
@@ -722,8 +730,8 @@ int addNewReview(int num_review, int num_user, string review_user_id[], string u
         cin >> input_rating;
         cin.ignore(); // Clear the buffer
 
-        // Input Validation
-        while (input_rating < 0 || input_rating >5){
+        // Input Data Validation
+        while (input_rating < 0 || input_rating > 5){
             cout << "Invalid Input for Rating.\n";
             cout << "Enter Rating: ";
             cin >> input_rating;

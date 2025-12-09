@@ -17,4 +17,4 @@ U016	3	Breakfast average	Grand Imperial
 U017	5	Very satisfied	Sunrise Hotel
 U018	4	Clean and modern	CityView Hotel
 U019	3	Acceptable	Maple Stay
-U020	5	Top-notch luxury	Royal Palace	
+U020	5	Top-notch luxury	Royal Palace
