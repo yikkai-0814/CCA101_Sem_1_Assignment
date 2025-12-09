@@ -156,11 +156,10 @@ void updateMembershipCategory(string user_id[], string membership_category[], in
     }
 
      if (membership_update){
-        // Title in cyan
-        cout << "\033[1;36m\n========================== Membership Upgrades ===========================\033[0m" << endl << endl;
+        
+        cout << "\033[1;96m\n========================== Membership Upgrades ===========================\033[0m" << endl << endl; // Cyan
 
-        // Header in yellow
-        cout << "\033[1;33m"; // Bright yellow
+        cout << "\033[1;93m"; // Bright yellow
         cout << left
              << setw(10) << "UserID"
              << setw(20) << "Username"
@@ -285,12 +284,14 @@ void displaySpecificUserReview(string user_id[], string user_name[], string revi
         string username = " "; // Initialize username
         
         // Display header
+        cout << "\033[1;96m"; // Cyan
         cout << left 
         << setw(10) << "UserID" 
         << setw(15) << "Username" 
         << setw(20) << "Review Rating" 
         << setw(25) << "Hotel Name" 
         << setw(50) << "Review Statement" << endl;
+        cout << "\033[0m"; // Reset color
 
         // Loop to find the review based on review user id
         for (int i=0 ; i< num_review; i++){
@@ -312,40 +313,50 @@ void displaySpecificUserReview(string user_id[], string user_name[], string revi
 
     // Display appropriate message when the user is not found
     if (user_status == false){
-        cout << "User not found!\n";
+        cout << "\033[1;91m" << "User is not found!\n" << "\033[0m";  // Display message in red color and reset it at the end
     }
     else{ 
         // Display appropriate message when no review is made by the user
         if (review_status == false){
-            cout << "This user doesn't make any review.\n";
+            cout << "\033[1;91m" << "This user doesn't make any review.\n" << "\033[0m"; // Display message in red color and reset it at the end
         }
     }
 }
 
 // Create function to display review for a specific hotel
 void displaySpecificHotelReview(string input_hotel_name, string review_hotel_name[], string review_user_id[], int review_rating[], 
-    string review_statement[], string user_name[], string user_id[], int number_review, int num_user){
+    string review_statement[], string user_name[], string user_id[], int number_review, int num_user, int number_hotel, string hotel_name[]){
 
     // Declare boolean status
     bool review_status = false;
+    bool hotel_status = false;
 
     for (int i=0; i<number_review; i++){
+
+        for (int j=0; j<number_hotel; j++){
+
+            if (input_hotel_name == hotel_name[j]){
+                hotel_status = true;
+            }
+        }
 
         if (input_hotel_name == review_hotel_name[i]){
             review_status = true;
         }
     }
 
-    if (review_status == true){
+    if (review_status == true && hotel_status == true){
 
         string username = " "; // Initialize username
 
         // Display Header
+        cout << "\033[1;96m"; // Cyan
         cout << left 
         << setw(10) << "UserID" 
         << setw(25) << "Username"
         << setw(20) << "Review Rating" 
         << setw(30) << "Review Statement" << endl;
+        cout << "\033[0m"; // Restore colours to default
 
         // Create loop to display the review of a specific hotel
         for (int i=0 ;i<number_review; i++){
@@ -365,8 +376,15 @@ void displaySpecificHotelReview(string input_hotel_name, string review_hotel_nam
             }   
         }
     }
+    
+    // Display appropriate message when the input hotel name is not in the list of hotel
+    if (hotel_status == false){
+        cout << "\033[1;91m" << "Hotel is not found! Please use the hotel name listed above!\n" << "\033[0m" ; // Display message in red color and reset it at the end
+    }
     else{
-        cout << "The hotel is not found or no review is made to this hotel.\n";
+        if(review_status == false){
+            cout << "\033[1;91m" << "No review is made to this hotel!\n" << "\033[0m"; // Display message in red color and reset it at the end
+        }
     }
 }
 
@@ -375,6 +393,7 @@ void displayUserLatestInfo(string user_id[], string user_name[], string country[
     int current_points[] , int num_user){
 
     // Display Header
+    cout << "\033[1;94m"; // Blue colour
     cout << left 
     << setw(10) << "UserID" 
     << setw(20) <<"Username" 
@@ -383,6 +402,7 @@ void displayUserLatestInfo(string user_id[], string user_name[], string country[
     << setw(30) << "Email Address" 
     << setw(25) << "Membership Category" 
     << setw(12) << "Current Points" << endl;
+    cout << "\033[0m"; // Restore colours to default
 
     // Create loop to display the latest user information
     for (int i=0; i<num_user; i++){
@@ -419,12 +439,14 @@ void displayHighRatingReview(string input_hotel_name, string review_hotel_name[]
     if (review_status == true){
 
         // Display Header
+        cout << "\033[1;96m"; // Cyan colour
         cout << left 
         << setw(10) << "UserID" 
         << setw(25) << "Username"
         << setw(20) << "Review Rating" 
         << setw(30) << "Review Statement" 
         << endl;
+        cout << "\033[0m"; // Reset Colour
 
         string username = " "; // Initialize username
 
@@ -475,11 +497,13 @@ void innerDisplayUsersByMembership(string user_id[], string user_name[], string 
     if (membership_status == true){
         // Display Header
         cout << endl << target_category << " Member\n";
+        cout << "\033[1;96m"; // Cyan 
         cout << left
         << setw(10) << "UserID"
         << setw(25) << "Username"
         << setw(12) << "Current Points"
         << endl;
+        cout << "\033[0m"; // Reset Colours
 
         // Loop to find target category member
         for (int i=0; i<num_user; i++){
@@ -540,12 +564,14 @@ void sortUsersNumReview(int num_user, int count_review[], string user_id[], stri
 void displayTopReviewerLeaderboard(int num_user, int count_review[], string user_id[], string user_name[], int current_points[]){
 
     // Display Header
+    cout << "\033[1;96m"; // Cyan
     cout << left 
     << setw(15) << "Rankings"
     << setw(10) << "UserID"
     << setw(20) << "Username"
     << setw(10) << "Number of Review Made"
     << endl;
+    cout << "\033[0m"; // Reset Colour
     
     for (int i=0; i<num_user; i++){
         
@@ -592,12 +618,14 @@ void displayTop3Reviewer(int num_user, int count_review[], string user_id[], str
     }
 
     // Display Header
+    cout << "\033[1;96m"; // Cyan
     cout << left 
     << setw(15) << "Rankings"
     << setw(10) << "UserID"
     << setw(20) << "Username"
     << setw(10) << "Number of Review Made"
     << endl;
+    cout << "\033[0m"; // Reset Colour
 
     // Call Function
    sortUsersNumReview(num_user, count_review, user_id, user_name);
@@ -845,7 +873,7 @@ int main(){
 
             // Display All Reviews Written by a Specific User
             case 1:
-                cout << "Enter User ID: ";
+                cout << "Enter User ID: "; // Prompt user to make input
                 cin >> input_user_id;
                 cout << endl;
 
@@ -855,12 +883,19 @@ int main(){
 
             // Display All Reviews for a specific hotel 
             case 2:
-                cout << "Enter the name of hotel: ";
+
+                // Display Available Hotel 
+                cout << endl << "\033[1;91m" <<  "Available Hotel List: " << "\033[0m" << endl;
+                for (int i=0; i<number_hotel; i++){
+                    cout << "[" <<  i + 1 << "] "  << hotel_name[i] << endl;
+                }
+
+                cout << endl << "Enter the name of hotel: "; // Prompt user to make input
                 getline(cin, input_hotel_name);
                 cout << endl;
 
                 // Call Function
-                displaySpecificHotelReview(input_hotel_name, review_hotel_name, review_user_id, review_rating, review_statement, user_name, user_id, num_review, num_user);
+                displaySpecificHotelReview(input_hotel_name, review_hotel_name, review_user_id, review_rating, review_statement, user_name, user_id, num_review, num_user, number_hotel, hotel_name);
                 break;
 
             // Display updated user information
@@ -873,7 +908,14 @@ int main(){
 
             // Display All reviews with rating 4 or 5 for a specific hotel
             case 4:
-                cout << "Enter the name of hotel: ";
+
+                // Display Available Hotel 
+                cout << endl << "\033[1;91m" <<  "Available Hotel List: " << "\033[0m" << endl;
+                for (int i=0; i<number_hotel; i++){
+                    cout << "[" <<  i + 1 << "] "  << hotel_name[i] << endl;
+                }
+                
+                cout << endl << "Enter the name of hotel: ";
                 getline(cin, input_hotel_name);
                 cout << endl;
 
@@ -995,8 +1037,6 @@ int main(){
 
     // Close the output file stream object 
     updateUserFile.close();
-
-    // Rearrange the review position based on user id before save into the file
 
     // Update reviews.txt
     ofstream updateReviewFile; // Create a output file stream object for review.txt
