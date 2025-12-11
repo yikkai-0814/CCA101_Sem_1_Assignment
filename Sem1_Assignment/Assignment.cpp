@@ -16,28 +16,33 @@ int readUsers(string user_id[], string user_name[], string country[], string sta
     string email[], string membership_category[], int current_points[]){
     
     // Create stream object to read users.txt
-    ifstream inFile;
-    inFile.open("users.txt");
+    ifstream readUserFile;
+    readUserFile.open("users.txt");
+
+    // Display appropriate message if the file fails to be opened
+    if (readUserFile.fail()){
+        cout << "\033[1;91m" << "users.txt failed to be open!" << "\033[0m"; // Display message in red colour and reset it at the end
+    }
 
     // Declare Variable
     int count = 0;
 
     // Create loop to read data from users.txt into array 
-    while (getline(inFile, user_id[count], '\t')) {
+    while (count < MAX_USERS && getline(readUserFile, user_id[count], '\t')) {
 
-        getline(inFile, user_name[count], '\t');
-        getline(inFile, country[count], '\t');
-        getline(inFile, state[count], '\t');
-        getline(inFile, email[count], '\t');
-        getline(inFile, membership_category[count], '\t');
+        getline(readUserFile, user_name[count], '\t');
+        getline(readUserFile, country[count], '\t');
+        getline(readUserFile, state[count], '\t');
+        getline(readUserFile, email[count], '\t');
+        getline(readUserFile, membership_category[count], '\t');
 
-        inFile >> current_points[count];
-        inFile.ignore(); // clear newline
+        readUserFile >> current_points[count];
+        readUserFile.ignore(); // clear newline
 
         count++;
     }
 
-    inFile.close();
+    readUserFile.close();
     return count;
 }
 
@@ -45,25 +50,30 @@ int readUsers(string user_id[], string user_name[], string country[], string sta
 int readReview(string review_user_id[], int review_rating[], string review_statement[], string review_hotel_name[]){
     
     // Create a stream object to read review.txt
-    ifstream inFile_2;
-    inFile_2.open("review.txt");
+    ifstream readReviewFile;
+    readReviewFile.open("review.txt");
+
+     // Display appropriate message if the file fails to be opened
+    if (readReviewFile.fail()){
+        cout << "\033[1;91m" << "review.txt failed to be open!" << "\033[0m"; // Display message in red colour and reset it at the end
+    }
 
     // Declare Variable
     int count_review = 0;
     string temp_review_rating;
 
     // Create loop to read data from review.txt into array 
-    while(getline(inFile_2, review_user_id[count_review], '\t')){
+    while( count_review < MAX_REVIEWS && getline(readReviewFile, review_user_id[count_review], '\t')){
     
-        getline(inFile_2, temp_review_rating, '\t'); // Read rating as string
+        getline(readReviewFile, temp_review_rating, '\t'); // Read rating as string
         review_rating[count_review] = stoi(temp_review_rating); // Convert the rating from string to int
-        getline(inFile_2, review_statement[count_review], '\t');
-        getline(inFile_2, review_hotel_name[count_review]);
+        getline(readReviewFile, review_statement[count_review], '\t');
+        getline(readReviewFile, review_hotel_name[count_review]);
 
         count_review++;
     }
 
-    inFile_2.close();
+    readReviewFile.close();
     return count_review;
 }
 
@@ -792,6 +802,64 @@ int addNewReview(int num_review, int num_user, string review_user_id[], string u
     return number_hotel;
 }
 
+// Create function to update users.txt
+void updateUserFile(int num_user, string user_id[], string user_name[], string country[], string state[], string email[], string membership_category[], int current_points[]){
+    
+    ofstream updateUserFile; // Create a output file stream object for users.txt
+    updateUserFile.open("users.txt"); // Open file to clear the existing data and input data to users.txt
+
+    // Update the latest user data into users.txt
+    for (int i=0; i<num_user; i++){
+
+        updateUserFile << user_id[i] << "\t" 
+        << user_name[i] << "\t" 
+        << country[i] << "\t" 
+        << state[i] << "\t" 
+        << email[i] << "\t" 
+        << membership_category[i] << "\t" 
+        << current_points[i] << endl;
+
+    }
+
+    // Display appropriate message to tell user whether data is saved to the file
+    if (updateUserFile.is_open()){
+        cout << "\033[1;95m" << "\nLatest User Information have been updated to users.txt!" << "\033[0m"; // Display message in purple and reset it at the end
+    }
+    else{
+        cout << "\033[1;91m" << "\nData fails to be updated to users.txt!" << "\033[0m"; // Display message in red and reset it at the end
+    }
+
+    // Close the output file stream object 
+    updateUserFile.close();
+}
+
+// Create function to update review.txt
+void updateReviewFile(int num_review, string review_user_id[], int review_rating[], string review_statement[], string review_hotel_name[]){
+    
+    ofstream updateReviewFile; // Create a output file stream object for review.txt
+    updateReviewFile.open("review.txt"); // Open file to clear the existing data and input data to review.txt
+
+    // Update latest review data into review.txt
+    for(int i=0; i<num_review; i++){
+        
+        updateReviewFile << review_user_id[i] << "\t"
+        << review_rating[i] << "\t"
+        << review_statement[i] << "\t"
+        << review_hotel_name[i] << endl;
+    }
+
+    // Display appropriate message to tell user whether the data is saved into the file
+    if (updateReviewFile.is_open()){
+        cout << "\033[1;95m" << "\nThe latest review have been updated to review.txt!" << "\033[0m"; // Display message in purple and reset it at the end
+    }
+    else{
+        cout << "\033[1;91m" << "\nData fails to be updated to review.txt!" << "\033[0m"; // Display message in red and reset it at the end
+    }
+
+    // Close the output file stream object 
+    updateReviewFile.close();
+}
+
 // Create function for additional features
 void additionalFeatures(){
 
@@ -865,7 +933,7 @@ int main(){
         cout << "\033[1;94m[12]\033[0m Save & Exit" << endl;
         cout << "\033[1;95m================================================================\033[0m" << endl;
 
-        cout << "Enter your choice: ";
+        cout << "\nEnter your choice: ";
         cin >> choice; 
         cin.ignore(); // there is a newline after the choice entered so we need to flush the buffer
     
@@ -1026,41 +1094,12 @@ int main(){
         }       
     }
 
-    // Update users.txt
-    ofstream updateUserFile; // Create a output file stream object for users.txt
-    updateUserFile.open("users.txt"); // Open file to clear the existing data and input data to users.txt
+    // Call function to update users.txt
+    updateUserFile(num_user, user_id, user_name, country, state, email, membership_category, current_points);
 
-    // Update the latest user data into users.txt
-    for (int i=0; i<num_user; i++){
+    // Call function to update review.txt
+    updateReviewFile(num_review, review_user_id, review_rating, review_statement, review_hotel_name);
 
-        updateUserFile << user_id[i] << "\t" 
-        << user_name[i] << "\t" 
-        << country[i] << "\t" 
-        << state[i] << "\t" 
-        << email[i] << "\t" 
-        << membership_category[i] << "\t" 
-        << current_points[i] << endl;
-
-    }
-
-    // Close the output file stream object 
-    updateUserFile.close();
-
-    // Update reviews.txt
-    ofstream updateReviewFile; // Create a output file stream object for review.txt
-    updateReviewFile.open("review.txt"); // Open file to clear the existing data and input data to review.txt
-
-    // Update latest review data into review.txt
-    for(int i=0; i<num_review; i++){
-        
-        updateReviewFile << review_user_id[i] << "\t"
-        << review_rating[i] << "\t"
-        << review_statement[i] << "\t"
-        << review_hotel_name[i] << "\t" << endl;
-    }
-
-    // Close the output file stream object 
-    updateReviewFile.close();
-
+    cout << "\033[1;96m" << "\n\nThank you for using this system!" << "\033[0m"; // Display message in cyan and reset it at the end
     return 0;
 }
