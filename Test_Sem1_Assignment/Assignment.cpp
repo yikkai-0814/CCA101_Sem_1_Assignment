@@ -845,7 +845,7 @@ void updateReviewFile(int num_review, string review_user_id[], int review_rating
         updateReviewFile << review_user_id[i] << "\t"
         << review_rating[i] << "\t"
         << review_statement[i] << "\t"
-        << review_hotel_name[i] << "\t" << endl;
+        << review_hotel_name[i] << endl;
     }
 
     // Display appropriate message to tell user whether the data is saved into the file
