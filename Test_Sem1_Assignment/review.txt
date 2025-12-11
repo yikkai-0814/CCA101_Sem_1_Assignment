@@ -12,9 +12,9 @@ U011	4	Good for short stays	CityView Hotel
 U012	3	Fair price and fair quality	Maple Stay
 U013	2	Aircond noisy	Hotel Sakura
 U014	5	Perfect holiday	Royal Palace
-U015	4	Spacious lobby	Lotus Bay ResortS
+U015	4	Spacious lobby	Lotus Bay Resort
 U016	3	Breakfast average	Grand Imperial
 U017	5	Very satisfied	Sunrise Hotel
 U018	4	Clean and modern	CityView Hotel
 U019	3	Acceptable	Maple Stay
-U020	5	Top-notch luxury	Royal Palace	
+U020	5	Top-notch luxury	Royal Palace
