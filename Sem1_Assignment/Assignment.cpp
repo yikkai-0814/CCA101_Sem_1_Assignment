@@ -529,7 +529,7 @@ void innerDisplayUsersByMembership(string user_id[], string user_name[], string 
     }
     else{
         cout << endl << target_category << " Member\n";
-        cout << "No user is found in this membership category.\n";
+        cout << "\033[1;91m" << "No user is found in this membership category.\n" << "\033[0m"; // Dispaly message in red colour and reset it at the end
     }
 }
 
