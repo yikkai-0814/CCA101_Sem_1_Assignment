@@ -860,11 +860,6 @@ void updateReviewFile(int num_review, string review_user_id[], int review_rating
     updateReviewFile.close();
 }
 
-// Create function for additional features
-void additionalFeatures(){
-
-}
-
 
 int main(){
 
