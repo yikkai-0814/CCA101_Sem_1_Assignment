@@ -734,7 +734,7 @@ void displayHotelRatingSummary(int num_hotel, string hotel_name[], int number_re
     if (choice == 1){
         for (int i=0; i< num_hotel-1; i++){
             for (int j=i+1; j<num_hotel; j++){
-                if (number_review_hotel[j] > number_review_hotel[i]){
+                if (number_review_hotel[j] < number_review_hotel[i]){
                     swap (hotel_name[j], hotel_name[i]);
                     swap (number_review_hotel[j], number_review_hotel[i]);
                     swap (total_rating_hotel[j], total_rating_hotel[i]);
@@ -746,7 +746,7 @@ void displayHotelRatingSummary(int num_hotel, string hotel_name[], int number_re
     else if(choice == 2){
         for (int i=0; i< num_hotel-1; i++){
             for (int j=i+1; j<num_hotel; j++){
-                if (number_review_hotel[j] < number_review_hotel[i]){
+                if (number_review_hotel[j] > number_review_hotel[i]){
                     swap (hotel_name[j], hotel_name[i]);
                     swap (number_review_hotel[j], number_review_hotel[i]);
                     swap (total_rating_hotel[j], total_rating_hotel[i]);
