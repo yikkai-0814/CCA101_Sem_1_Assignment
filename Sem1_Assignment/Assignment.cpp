@@ -292,16 +292,7 @@ void displaySpecificUserReview(string user_id[], string user_name[], string revi
     if (user_status == true && review_status == true){
 
         string username = " "; // Initialize username
-        
-        // Display header
-        cout << "\033[1;96m"; // Cyan
-        cout << left 
-        << setw(10) << "UserID" 
-        << setw(15) << "Username" 
-        << setw(20) << "Review Rating" 
-        << setw(25) << "Hotel Name" 
-        << setw(50) << "Review Statement" << endl;
-        cout << "\033[0m"; // Reset color
+        int count = 1;
 
         // Loop to find the review based on review user id
         for (int i=0 ; i< num_review; i++){
@@ -311,12 +302,18 @@ void displaySpecificUserReview(string user_id[], string user_name[], string revi
 
             if (input_user_id == review_user_id[i]){
 
-                cout << left 
-                << setw(10) << review_user_id[i] 
-                << setw(15) << username // need to compare review_user_id with user_id
-                << setw(20) << review_rating[i] 
-                << setw(25) << review_hotel_name[i]  
-                << setw(50) << review_statement[i]<< endl;
+                 // Display Header
+                cout << "\033[1;96m"<< "\n================================\n";
+                cout << "         User Review " << count << endl;
+                cout << "================================\n" << "\033[0m";
+
+                cout << left;
+                cout << setw(15) << "User ID" << ": " << review_user_id[i] << endl;
+                cout << setw(15) << "Username" << ": " << username << endl;
+                cout << setw(15) << "Rating" << ": "<<review_rating[i] << "/5\n";
+                cout << setw(15) << "Hotel Name" << ": " << review_hotel_name[i] << endl;
+                cout << setw(15) << "Statement" << ": " << review_statement[i] << endl;
+                count++;
             }
         }
     }
@@ -359,14 +356,7 @@ void displaySpecificHotelReview(string input_hotel_name, string review_hotel_nam
 
         string username = " "; // Initialize username
 
-        // Display Header
-        cout << "\033[1;96m"; // Cyan
-        cout << left 
-        << setw(10) << "UserID" 
-        << setw(25) << "Username"
-        << setw(20) << "Review Rating" 
-        << setw(30) << "Review Statement" << endl;
-        cout << "\033[0m"; // Restore colours to default
+        int count = 1;
 
         // Create loop to display the review of a specific hotel
         for (int i=0 ;i<number_review; i++){
@@ -376,11 +366,17 @@ void displaySpecificHotelReview(string input_hotel_name, string review_hotel_nam
 
             if (input_hotel_name == review_hotel_name[i]){
 
-                cout << left 
-                << setw(10) << review_user_id[i] 
-                << setw(25) << username
-                << setw(20) << review_rating[i] 
-                << setw(30) << review_statement[i] << endl;
+                // Display Header
+                cout << "\033[1;96m"<< "\n================================\n";
+                cout << "         Hotel Review " << count << endl;
+                cout << "================================\n" << "\033[0m";
+
+                cout << left;
+                cout << setw(15) << "User ID" << ": " << review_user_id[i] << endl;
+                cout << setw(15) << "Username" << ": " << username << endl;
+                cout << setw(15) << "Rating" << ": "<<review_rating[i] << "/5\n";
+                cout << setw(15) << "Statement" << ": " << review_statement[i] << endl;
+                count++;
 
                 review_status = true;
             }   
@@ -448,17 +444,8 @@ void displayHighRatingReview(string input_hotel_name, string review_hotel_name[]
 
     if (review_status == true){
 
-        // Display Header
-        cout << "\033[1;96m"; // Cyan colour
-        cout << left 
-        << setw(10) << "UserID" 
-        << setw(25) << "Username"
-        << setw(20) << "Review Rating" 
-        << setw(30) << "Review Statement" 
-        << endl;
-        cout << "\033[0m"; // Reset Colour
-
         string username = " "; // Initialize username
+        int count = 1;
 
         // Create loop to display review of a specific hotel
         for (int i=0; i<num_review; i++){
@@ -469,12 +456,18 @@ void displayHighRatingReview(string input_hotel_name, string review_hotel_name[]
             if(input_hotel_name == review_hotel_name[i]){
                 
                 if (review_rating[i] >= 4){
-                    cout << left
-                    << setw(10) << review_user_id[i]
-                    << setw(25) << username
-                    << setw(20) << review_rating[i]
-                    << setw(30) << review_statement[i] 
-                    << endl;
+                    
+                    // Display Header
+                    cout << "\033[1;96m"<< "\n================================\n";
+                    cout << "         Hotel Review " << count << endl;
+                    cout << "================================\n" << "\033[0m";
+
+                    cout << left;
+                    cout << setw(15) << "User ID" << ": " << review_user_id[i] << endl;
+                    cout << setw(15) << "Username" << ": " << username << endl;
+                    cout << setw(15) << "Rating" << ": "<<review_rating[i] << "/5\n";
+                    cout << setw(15) << "Statement" << ": " << review_statement[i] << endl;
+                    count++;
                 }
             }
         }
@@ -540,24 +533,24 @@ void displayUsersByMembership(string user_id[], string user_name[], string membe
     bool choice_status = false;
     
     while(choice_status == false){ // Input Data Validation
-    cout << "\033[1;95m" << "\n===========================\n" << "\033[0m";  // Display text in purple and restore it at the end
-    cout << "\033[1;94m" << "   Sorting Features Menu\n" << "\033[0m";     // Display text in blue and restore it at the end
-    cout << "\033[1;95m" << "===========================\n" << "\033[0m";
-    cout << "\033[1;94m" << "1. Ascending Order\n2. Descending Order\n" << "\033[0m";
-    cout << "\nEnter your choice: ";
-    cin >> choice;
-    cin.ignore(); // flush the buffer
+        cout << "\033[1;95m" << "\n===========================\n" << "\033[0m";  // Display text in purple and restore it at the end
+        cout << "\033[1;94m" << "   Sorting Features Menu\n" << "\033[0m";     // Display text in blue and restore it at the end
+        cout << "\033[1;95m" << "===========================\n" << "\033[0m";
+        cout << "\033[1;94m" << "1. Ascending Order\n2. Descending Order\n" << "\033[0m";
+        cout << "\nEnter your choice: ";
+        cin >> choice;
+        cin.ignore(); // flush the buffer
 
-    if (choice == 1 || choice == 2){
-        choice_status = true;
-    }
-    else{
-        cout << "\033[1;91m" << "\nInvalid Choice! Please make input again!\n";
+        if (choice == 1 || choice == 2){
+            choice_status = true;
+        }
+        else{
+            cout << "\033[1;91m" << "\nInvalid Choice! Please make input again!\n";
+        }
     }
 
-    }
-
-    if (choice == 1){ // Sort users in ascending order
+    // Sort users in ascending order
+    if (choice == 1){ 
         for (int i=0;i<num_user -1; i++){
             for (int j=i+1; j<num_user; j++){
                 if (current_points[j] < current_points[i]){
@@ -569,9 +562,8 @@ void displayUsersByMembership(string user_id[], string user_name[], string membe
             }
         }
     }
-
-
-    if (choice == 2){ // Sort users in descending order
+    // Sort users in descending order
+    else if (choice == 2){ 
         for (int i=0; i<num_user -1; i++){
             for (int j=i+1; j<num_user; j++){
                 if (current_points[j] > current_points[i]){
@@ -718,12 +710,70 @@ void displayTop3Reviewer(int num_user, int count_review[], string user_id[], str
 // Create function to display hotel rating summary
 void displayHotelRatingSummary(int num_hotel, string hotel_name[], int number_review_hotel[], int total_rating_hotel[]){
 
+    int choice;
+    bool choice_status = false;
+
+    while(choice_status == false){ // Input Data Validation
+        cout << "\033[1;95m" << "\n===========================\n" << "\033[0m";  // Display text in purple and restore it at the end
+        cout << "\033[1;94m" << "   Sorting Features Menu\n" << "\033[0m";     // Display text in blue and restore it at the end
+        cout << "\033[1;95m" << "===========================\n" << "\033[0m";
+        cout << "\033[1;94m" << "1. Ascending Order\n2. Descending Order\n" << "\033[0m";
+        cout << "\nEnter your choice: ";
+        cin >> choice;
+        cin.ignore(); // flush the buffer
+
+        if (choice == 1 || choice == 2){
+        choice_status = true;
+        }
+        else{
+            cout << "\033[1;91m" << "\nInvalid Choice! Please make input again!\n";
+        }
+    }
+
+    // Sort hotel in ascending order 
+    if (choice == 1){
+        for (int i=0; i< num_hotel-1; i++){
+            for (int j=i+1; j<num_hotel; j++){
+                if (number_review_hotel[j] > number_review_hotel[i]){
+                    swap (hotel_name[j], hotel_name[i]);
+                    swap (number_review_hotel[j], number_review_hotel[i]);
+                    swap (total_rating_hotel[j], total_rating_hotel[i]);
+                }
+            }
+        }
+    }
+    // Sort hotel in descending order
+    else if(choice == 2){
+        for (int i=0; i< num_hotel-1; i++){
+            for (int j=i+1; j<num_hotel; j++){
+                if (number_review_hotel[j] < number_review_hotel[i]){
+                    swap (hotel_name[j], hotel_name[i]);
+                    swap (number_review_hotel[j], number_review_hotel[i]);
+                    swap (total_rating_hotel[j], total_rating_hotel[i]);
+                }
+            }
+        }
+    }
+
+    // Dislay Header
+    cout << "\033[1;96m";
+    cout << endl;
+    cout << left 
+    << setw(30) << "Hotel Name"
+    << setw(20) << "Average Rating"
+    << setw(20) << "Number of Review"
+    << endl;
+    cout << "\033[0m"; // Restore colour to default at the end
+
     for (int i=0; i<num_hotel; i++){
 
         double average_rating = static_cast<double>(total_rating_hotel[i]) / static_cast<double>(number_review_hotel[i]);
 
-        cout << "The average rating of " << hotel_name[i] << " is: " << fixed << showpoint << setprecision(2) << average_rating << endl;
-        cout << "The total number of reviews of " << hotel_name[i] << "is :" << number_review_hotel[i] << endl << endl;
+        cout << left 
+        << setw(30) << hotel_name[i]
+        << setw(20) << fixed << showpoint << setprecision(2) << average_rating
+        << setw(20) << number_review_hotel[i]
+        << endl;
 
     }
 }
@@ -967,9 +1017,12 @@ int main(){
     // Copy array for sorting purpose
     string copy_user_id[MAX_USERS], 
     copy_user_name[MAX_USERS],
-    sort_membership_category[MAX_USERS];
+    sort_membership_category[MAX_USERS],
+    copy_hotel_name[MAX_USERS];
 
-    int copy_current_points[MAX_USERS];
+    int copy_current_points[MAX_USERS],
+    copy_number_review_hotel[MAX_REVIEWS],
+    copy_total_rating_hotel[MAX_REVIEWS];
 
     // Create menu-driven interface
     // Declare variables used for output features
@@ -977,7 +1030,7 @@ int main(){
     string input_user_id , input_hotel_name;
 
     // Data Validation
-    while (choice != 12){
+    while (choice != 11){
 
         // Display Header
         cout << "\033[1;95m\n====================== TRAVELGO MAIN MENU ======================\033[0m" << endl;
@@ -991,8 +1044,7 @@ int main(){
         cout << "\033[1;94m[8]\033[0m  Top 3 Reviewers" << endl;
         cout << "\033[1;94m[9]\033[0m  Hotel Rating Summary" << endl;
         cout << "\033[1;94m[10]\033[0m Add Review" << endl;
-        cout << "\033[1;94m[11]\033[0m Additional Features" << endl;
-        cout << "\033[1;94m[12]\033[0m Save & Exit" << endl;
+        cout << "\033[1;94m[11]\033[0m Save & Exit" << endl;
         cout << "\033[1;95m================================================================\033[0m" << endl;
 
         cout << "\nEnter your choice: ";
@@ -1013,7 +1065,7 @@ int main(){
             case 1:
                 cout << "Enter User ID: "; // Prompt user to make input
                 cin >> input_user_id;
-                cout << endl;
+                cin.ignore();
 
                 // Call function
                 displaySpecificUserReview(user_id, user_name, review_user_id, review_rating, review_statement, review_hotel_name, input_user_id, num_review, num_user, choice);
@@ -1025,12 +1077,11 @@ int main(){
                 // Display Available Hotel 
                 cout << endl << "\033[1;91m" <<  "Available Hotel List: " << "\033[0m" << endl;
                 for (int i=0; i<number_hotel; i++){
-                    cout << "[" <<  i + 1 << "] "  << hotel_name[i] << endl;
+                    cout << "\033[1;94m" << "[" <<  i + 1 << "] "  << hotel_name[i] << "\033[0m" << endl;
                 }
 
                 cout << endl << "Enter the name of hotel: "; // Prompt user to make input
                 getline(cin, input_hotel_name);
-                cout << endl;
 
                 // Call Function
                 displaySpecificHotelReview(input_hotel_name, review_hotel_name, review_user_id, review_rating, review_statement, user_name, user_id, num_review, num_user, number_hotel, hotel_name);
@@ -1050,12 +1101,11 @@ int main(){
                 // Display Available Hotel 
                 cout << endl << "\033[1;91m" <<  "Available Hotel List: " << "\033[0m" << endl;
                 for (int i=0; i<number_hotel; i++){
-                    cout << "[" <<  i + 1 << "] "  << hotel_name[i] << endl;
+                    cout << "\033[1;94m" << "[" <<  i + 1 << "] "  << hotel_name[i] << "\033[0m" << endl;
                 }
                 
                 cout << endl << "Enter the name of hotel: ";
                 getline(cin, input_hotel_name);
-                cout << endl;
 
                 // Call Function
                 displayHighRatingReview(input_hotel_name, review_hotel_name, review_user_id, review_rating, review_statement, user_id, user_name, num_user, num_review);
@@ -1120,8 +1170,15 @@ int main(){
             case 9:
                 cout << endl;
 
+                // Copy array for sorting purpose
+                for (int i=0; i<number_hotel; i++){
+                    copy_hotel_name[i] = hotel_name[i];
+                    copy_number_review_hotel[i] = number_review_hotel[i];
+                    copy_total_rating_hotel[i] = total_rating_hotel[i];
+                }
+
                 // Call Function
-                displayHotelRatingSummary(number_hotel, hotel_name, number_review_hotel, total_rating_hotel);
+                displayHotelRatingSummary(number_hotel, copy_hotel_name, copy_number_review_hotel, copy_total_rating_hotel);
                 break;
 
             // Add new review
