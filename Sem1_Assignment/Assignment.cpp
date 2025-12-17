@@ -9,8 +9,6 @@ using namespace std;
 const int MAX_USERS = 100;
 const int MAX_REVIEWS = 100;
 
-// Functions to read data from files
-
 // Create function to read users.txt
 int readUsers(string user_id[], string user_name[], string country[], string state[], 
     string email[], string membership_category[], int current_points[]){
@@ -76,10 +74,6 @@ int readReview(string review_user_id[], int review_rating[], string review_state
     readReviewFile.close();
     return count_review;
 }
-
-// ------------------------------------------------------------------------------------------------------------
-
-// Functions to update data
 
 // Create function to count number of word of each review
 void calculateNumWordReviewStatement(string review_statement[], int number_word_review_statement[], int num_review){
@@ -248,10 +242,6 @@ void calculateNumReviewHotel(string review_hotel_name[], int review_rating[], in
     }
 }
 
-// -----------------------------------------------------------------------------------------------------------------------------
-
-// Functions used for output features 
-
 // Create function to find username based on review user id
 string findUsername(int num_user, string user_name[], string review_user_id, string user_id[], string username){
 
@@ -401,25 +391,49 @@ void displayUserLatestInfo(string user_id[], string user_name[], string country[
     // Display Header
     cout << "\033[1;94m"; // Blue colour
     cout << left 
-    << setw(10) << "UserID" 
-    << setw(20) <<"Username" 
-    << setw(15) << "Country" 
-    << setw(18) << "State" 
-    << setw(30) << "Email Address" 
-    << setw(25) << "Membership Category" 
-    << setw(12) << "Current Points" << endl;
-    cout << "\033[0m"; // Restore colours to default
+    << "|" << setw(10) << "UserID" 
+    << "|" << setw(20) <<"Username" 
+    << "|" << setw(15) << "Country" 
+    << "|" << setw(18) << "State" 
+    << "|" << setw(30) << "Email Address" 
+    << "|" << setw(25) << "Membership Category" 
+    << "|" << setw(15) << "Current Points" << "|"
+    << endl;
+  
+    // Display Horizontal Line
+    cout << "+"
+    << string(10, '-')   << "+" 
+    << string(20, '-')   << "+"
+    << string(15, '-')   << "+"
+    << string(18, '-')   << "+"
+    << string(30, '-')   << "+"
+    << string(25, '-')   << "+"
+    << string(15, '-')   << "+\n";
+    cout << "\033[0m";
 
     // Create loop to display the latest user information
     for (int i=0; i<num_user; i++){
         cout << left 
-        << setw(10) << user_id[i] 
-        << setw(20) << user_name[i] 
-        << setw(15) << country[i] 
-        << setw(18) << state[i] 
-        << setw(30) << email[i] 
-        << setw(25) << membership_category[i]
-        << setw(12) << current_points[i] << endl;
+        << "\033[1;94m|\033[0m" << setw(10) << user_id[i] 
+        << "\033[1;94m|\033[0m" << setw(20) << user_name[i] 
+        << "\033[1;94m|\033[0m" << setw(15) << country[i] 
+        << "\033[1;94m|\033[0m" << setw(18) << state[i] 
+        << "\033[1;94m|\033[0m" << setw(30) << email[i] 
+        << "\033[1;94m|\033[0m" << setw(25) << membership_category[i]
+        << "\033[1;94m|\033[0m" << setw(15) << current_points[i] << "\033[1;94m|\033[0m"
+        << endl;
+
+        // Print horizontal line
+        cout << "\033[1;94m";
+        cout << "+"
+        << string(10, '-')   << "+" 
+        << string(20, '-')   << "+"
+        << string(15, '-')   << "+"
+        << string(18, '-')   << "+"
+        << string(30, '-')   << "+"
+        << string(25, '-')   << "+"
+        << string(15, '-')   << "+\n";
+        cout << "\033[0m";
     }
 }
 
@@ -479,9 +493,10 @@ void displayHighRatingReview(string input_hotel_name, string review_hotel_name[]
 
 // Create function to display summary of activities
 void displaySummaryActivities(int num_user, int num_review, int total_points_awarded){
-    cout << "Total number of users: " << num_user << endl;
-    cout << "Total number of reviews: " << num_review << endl;
-    cout << "Total points awarded system-wide: "<< total_points_awarded << endl;
+    cout << left;
+    cout << setw(35) << "Total number of users" << ": " << num_user << endl;
+    cout << setw(35) << "Total number of reviews" << ": " << num_review << endl;
+    cout << setw(35) << "Total points awarded system-wide" << ": " << total_points_awarded << endl;
 }
 
 // Create function that used for display specific membership category members
@@ -499,29 +514,43 @@ void innerDisplayUsersByMembership(string user_id[], string user_name[], string 
 
     if (membership_status == true){
         // Display Header
-        cout << endl << target_category << " Member\n";
-        cout << "\033[1;96m"; // Cyan 
+        cout << endl << "\033[1;96m" << target_category << " Member\n\033[0m";
+        cout << "\033[1;94m"; 
         cout << left
-        << setw(10) << "UserID"
-        << setw(25) << "Username"
-        << setw(12) << "Current Points"
+        << "|" <<setw(10) << "UserID"
+        << "|" << setw(20) << "Username"
+        << "|" << setw(15) << "Current Points" << "|"
         << endl;
-        cout << "\033[0m"; // Reset Colours
+
+        // Print horizontal line
+        cout << "+"
+        << string(10, '-')   << "+" 
+        << string(20, '-')   << "+"
+        << string(15, '-')   << "+\n";
+        cout << "\033[0m";
 
         // Loop to find target category member
         for (int i=0; i<num_user; i++){
 
             if (membership_category[i] == target_category){
                 cout << left
-                << setw(10) << user_id[i]
-                << setw(25) << user_name[i]
-                << setw(12) << current_points[i]
+                << "\033[1;94m|\033[0m" << setw(10) << user_id[i]
+                << "\033[1;94m|\033[0m" << setw(20) << user_name[i]
+                << "\033[1;94m|\033[0m" << setw(15) << current_points[i] << "\033[1;94m|\033[0m"
                 << endl;
+
+                // Print horizontal line
+                cout << "\033[1;94m";
+                cout << "+"
+                << string(10, '-')   << "+" 
+                << string(20, '-')   << "+"
+                << string(15, '-')   << "+\n";
+                cout << "\033[0m";
             }
         }
     }
     else{
-        cout << endl << target_category << " Member\n";
+        cout << endl << "\033[1;96m" << target_category << " Member\n\033[0m";
         cout << "\033[1;91m" << "No user is found in this membership category.\n" << "\033[0m"; // Dispaly message in red colour and reset it at the end
     }
 }
@@ -616,13 +645,20 @@ void sortUsersNumReview(int num_user, int count_review[], string user_id[], stri
 void displayTopReviewerLeaderboard(int num_user, int count_review[], string user_id[], string user_name[], int current_points[]){
 
     // Display Header
-    cout << "\033[1;96m"; // Cyan
+    cout << "\033[1;94m"; // Cyan
     cout << left 
-    << setw(15) << "Rankings"
-    << setw(10) << "UserID"
-    << setw(20) << "Username"
-    << setw(10) << "Number of Review Made"
+    << "|" << setw(10) << "Rankings"
+    << "|" << setw(10) << "UserID"
+    << "|" << setw(20) << "Username"
+    << "|" << setw(22) << "Number of Review Made" << "|"
     << endl;
+
+    // Print horizontal line
+    cout << "+"
+    << string(10, '-')   << "+" 
+    << string(10, '-')   << "+"
+    << string(20, '-')   << "+"
+    << string(22, '-')   << "+\n";
     cout << "\033[0m"; // Reset Colour
     
     for (int i=0; i<num_user; i++){
@@ -651,11 +687,20 @@ void displayTopReviewerLeaderboard(int num_user, int count_review[], string user
         }
 
         cout << left
-        << setw(15) << rank
-        << setw(10) << user_id[i]
-        << setw(20) << user_name[i]
-        << setw(10) << count_review[i]
+        << "\033[1;94m|\033[0m" << setw(10) << rank
+        << "\033[1;94m|\033[0m" << setw(10) << user_id[i]
+        << "\033[1;94m|\033[0m" << setw(20) << user_name[i]
+        << "\033[1;94m|\033[0m" << setw(22) << count_review[i] << "\033[1;94m|\033[0m"
         << endl; 
+
+        // Print horizontal line
+        cout << "\033[1;94m";
+        cout << "+"
+        << string(10, '-')   << "+" 
+        << string(10, '-')   << "+"
+        << string(20, '-')   << "+"
+        << string(22, '-')   << "+\n";
+        cout << "\033[0m"; // Reset Colour
     }
 
 }
@@ -670,13 +715,20 @@ void displayTop3Reviewer(int num_user, int count_review[], string user_id[], str
     }
 
     // Display Header
-    cout << "\033[1;96m"; // Cyan
+    cout << "\033[1;94m"; // Cyan
     cout << left 
-    << setw(15) << "Rankings"
-    << setw(10) << "UserID"
-    << setw(20) << "Username"
-    << setw(10) << "Number of Review Made"
+    << "|" << setw(10) << "Rankings"
+    << "|" << setw(10) << "UserID"
+    << "|" << setw(20) << "Username"
+    << "|" << setw(22) << "Number of Review Made" << "|"
     << endl;
+
+    // Print horizontal line
+    cout << "+"
+    << string(10, '-')   << "+" 
+    << string(10, '-')   << "+"
+    << string(20, '-')   << "+"
+    << string(22, '-')   << "+\n";
     cout << "\033[0m"; // Reset Colour
 
     // Call Function
@@ -698,11 +750,20 @@ void displayTop3Reviewer(int num_user, int count_review[], string user_id[], str
         
         if (rank <= 3){
             cout << left
-            << setw(15) << rank
-            << setw(10) << user_id[i]
-            << setw(20) << user_name[i]
-            << setw(10) << count_review[i]
-            << endl;
+            << "\033[1;94m|\033[0m" << setw(10) << rank
+            << "\033[1;94m|\033[0m" << setw(10) << user_id[i]
+            << "\033[1;94m|\033[0m" << setw(20) << user_name[i]
+            << "\033[1;94m|\033[0m" << setw(22) << count_review[i] << "\033[1;94m|\033[0m"
+            << endl; 
+
+            // Print horizontal line
+            cout << "\033[1;94m";
+            cout << "+"
+            << string(10, '-')   << "+" 
+            << string(10, '-')   << "+"
+            << string(20, '-')   << "+"
+            << string(22, '-')   << "+\n";
+            cout << "\033[0m"; // Reset Colour
         }
     }
 }
@@ -756,25 +817,38 @@ void displayHotelRatingSummary(int num_hotel, string hotel_name[], int number_re
     }
 
     // Dislay Header
-    cout << "\033[1;96m";
+    cout << "\033[1;94m";
     cout << endl;
     cout << left 
-    << setw(30) << "Hotel Name"
-    << setw(20) << "Average Rating"
-    << setw(20) << "Number of Review"
+    << "|" << setw(30) << "Hotel Name"
+    << "|" << setw(20) << "Average Rating"
+    << "|" << setw(20) << "Number of Review" << "|"
     << endl;
-    cout << "\033[0m"; // Restore colour to default at the end
+    
+    // Print horizontal line
+    cout << "+"
+    << string(30, '-')   << "+" 
+    << string(20, '-')   << "+"
+    << string(20, '-')   << "+\n";
+    cout << "\033[0m"; // Reset Colour
 
     for (int i=0; i<num_hotel; i++){
 
         double average_rating = static_cast<double>(total_rating_hotel[i]) / static_cast<double>(number_review_hotel[i]);
 
         cout << left 
-        << setw(30) << hotel_name[i]
-        << setw(20) << fixed << showpoint << setprecision(2) << average_rating
-        << setw(20) << number_review_hotel[i]
+        << "\033[1;94m|\033[0m" << setw(30) << hotel_name[i]
+        << "\033[1;94m|\033[0m" << setw(20) << fixed << showpoint << setprecision(2) << average_rating
+        << "\033[1;94m|\033[0m" << setw(20) << number_review_hotel[i] << "\033[1;94m|\033[0m" 
         << endl;
 
+        // Print horizontal line
+        cout << "\033[1;94m";
+        cout << "+"
+        << string(30, '-')   << "+" 
+        << string(20, '-')   << "+"
+        << string(20, '-')   << "+\n";
+        cout << "\033[0m"; // Reset Colour
     }
 }
 
@@ -1168,7 +1242,6 @@ int main(){
 
             // Display Hotel Rating Summary
             case 9:
-                cout << endl;
 
                 // Copy array for sorting purpose
                 for (int i=0; i<number_hotel; i++){
