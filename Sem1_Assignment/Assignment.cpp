@@ -536,6 +536,56 @@ void innerDisplayUsersByMembership(string user_id[], string user_name[], string 
 // Create function to display users grouped by membership category
 void displayUsersByMembership(string user_id[], string user_name[], string membership_category[], int current_points[], int num_user){
 
+    int choice;
+    bool choice_status = false;
+    
+    while(choice_status == false){ // Input Data Validation
+    cout << "\033[1;95m" << "\n===========================\n" << "\033[0m";  // Display text in purple and restore it at the end
+    cout << "\033[1;94m" << "   Sorting Features Menu\n" << "\033[0m";     // Display text in blue and restore it at the end
+    cout << "\033[1;95m" << "===========================\n" << "\033[0m";
+    cout << "\033[1;94m" << "1. Ascending Order\n2. Descending Order\n" << "\033[0m";
+    cout << "\nEnter your choice: ";
+    cin >> choice;
+    cin.ignore(); // flush the buffer
+
+    if (choice == 1 || choice == 2){
+        choice_status = true;
+    }
+    else{
+        cout << "\033[1;91m" << "\nInvalid Choice! Please make input again!\n";
+    }
+
+    }
+
+    if (choice == 1){ // Sort users in ascending order
+        for (int i=0;i<num_user -1; i++){
+            for (int j=i+1; j<num_user; j++){
+                if (current_points[j] < current_points[i]){
+                    swap(user_id[j], user_id[i]);
+                    swap(user_name[j], user_name[i]);
+                    swap(current_points[j], current_points[i]);
+                    swap(membership_category[j], membership_category[i]);
+                }
+            }
+        }
+    }
+
+
+    if (choice == 2){ // Sort users in descending order
+        for (int i=0; i<num_user -1; i++){
+            for (int j=i+1; j<num_user; j++){
+                if (current_points[j] > current_points[i]){
+                    
+                    swap(user_id[j], user_id[i]);
+                    swap(user_name[j], user_name[i]);
+                    swap(current_points[j], current_points[i]);
+                    swap(membership_category[j], membership_category[i]);
+                }
+            }
+        }
+    }
+
+
     // Call function to display platinum member
     innerDisplayUsersByMembership(user_id, user_name, membership_category, current_points, num_user, "Platinum");
 
@@ -864,12 +914,26 @@ void updateReviewFile(int num_review, string review_user_id[], int review_rating
 int main(){
 
     // Create array for users.txt file
-    string user_id[MAX_USERS], user_name[MAX_USERS], country[MAX_USERS], state[MAX_USERS], email[MAX_USERS], membership_category[MAX_USERS];
-    int current_points[MAX_USERS], count_review[MAX_USERS];
+    string user_id[MAX_USERS], 
+    user_name[MAX_USERS], 
+    country[MAX_USERS], 
+    state[MAX_USERS], 
+    email[MAX_USERS], 
+    membership_category[MAX_USERS];
+
+    int current_points[MAX_USERS], 
+    count_review[MAX_USERS];
 
     // Create array for review.txt
-    string review_user_id[MAX_REVIEWS], review_statement[MAX_REVIEWS], review_hotel_name[MAX_REVIEWS], hotel_name[MAX_REVIEWS];
-    int review_rating [MAX_REVIEWS], number_word_review_statement[MAX_REVIEWS], number_review_hotel[MAX_REVIEWS], total_rating_hotel[MAX_REVIEWS];
+    string review_user_id[MAX_REVIEWS], 
+    review_statement[MAX_REVIEWS], 
+    review_hotel_name[MAX_REVIEWS], 
+    hotel_name[MAX_REVIEWS];
+
+    int review_rating [MAX_REVIEWS], 
+    number_word_review_statement[MAX_REVIEWS], 
+    number_review_hotel[MAX_REVIEWS], 
+    total_rating_hotel[MAX_REVIEWS];
     
     // Call readUsers function to read data into array and find the number of users
     int num_user = readUsers(user_id, user_name, country, state, email, membership_category, current_points);
@@ -901,7 +965,10 @@ int main(){
     calculateNumReviewHotel(review_hotel_name, review_rating, num_review, number_hotel, hotel_name, number_review_hotel, total_rating_hotel);
 
     // Copy array for sorting purpose
-    string copy_user_id[MAX_USERS], copy_user_name[MAX_USERS];
+    string copy_user_id[MAX_USERS], 
+    copy_user_name[MAX_USERS],
+    sort_membership_category[MAX_USERS];
+
     int copy_current_points[MAX_USERS];
 
     // Create menu-driven interface
@@ -1004,9 +1071,17 @@ int main(){
 
             // Display users grouped by membership category
             case 6:
+                
+                // Loop to copy array
+                for (int i=0; i<num_user; i++){
+                    copy_user_id[i] = user_id[i];
+                    copy_user_name[i] = user_name[i];
+                    copy_current_points[i] = current_points[i];
+                    sort_membership_category[i] = membership_category[i];
+                }
 
                 // Call Function
-                displayUsersByMembership(user_id, user_name, membership_category, current_points, num_user);
+                displayUsersByMembership(copy_user_id, copy_user_name, sort_membership_category, copy_current_points, num_user);
                 break;
 
             // Display Top Reviewer Leaderboard
