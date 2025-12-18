@@ -2,6 +2,7 @@
 # include <iomanip>
 # include <fstream>
 # include <string>
+# include <algorithm>
 
 using namespace std;
 
@@ -1034,6 +1035,44 @@ void updateReviewFile(int num_review, string review_user_id[], int review_rating
     updateReviewFile.close();
 }
 
+// Create function to lowercase the input letter
+string toLower(string text){
+    transform(text.begin(),text.end(), text.begin(), :: tolower); // Convert the keyword to lowercase 
+    return text;
+}
+
+
+// Create function to search review by text
+void searchReviewByWord(int num_review,int num_user, string keyword, string review_statement[], string user_id[], string review_user_id[], 
+    string user_name[], string review_hotel_name[], int review_rating[]){
+
+    int count = 1;
+
+    for (int i=0; i<num_review; i++){
+
+        string username = " "; // Initialize username
+        string statement = toLower(review_statement[i]); // Call function to lowercase all the letter in review statement
+
+        // Call function to find username based on review id
+        username = findUsername(num_user, user_name, review_user_id[i], user_id, username);
+
+        if (statement.find(keyword) != string::npos){
+            
+            // Display Header
+                cout << "\033[1;96m"<< "\n================================\n";
+                cout << "         User Review " << count << endl;
+                cout << "================================\n" << "\033[0m";
+
+                cout << left;
+                cout << setw(15) << "User ID" << ": " << review_user_id[i] << endl;
+                cout << setw(15) << "Username" << ": " << username << endl;
+                cout << setw(15) << "Rating" << ": "<<review_rating[i] << "/5\n";
+                cout << setw(15) << "Hotel Name" << ": " << review_hotel_name[i] << endl;
+                cout << setw(15) << "Statement" << ": " << review_statement[i] << endl;
+                count++;
+        }
+    }
+}
 
 int main(){
 
@@ -1104,7 +1143,7 @@ int main(){
     string input_user_id , input_hotel_name;
 
     // Data Validation
-    while (choice != 11){
+    while (choice != 12){
 
         // Display Header
         cout << "\033[1;95m\n====================== TRAVELGO MAIN MENU ======================\033[0m" << endl;
@@ -1118,7 +1157,8 @@ int main(){
         cout << "\033[1;94m[8]\033[0m  Top 3 Reviewers" << endl;
         cout << "\033[1;94m[9]\033[0m  Hotel Rating Summary" << endl;
         cout << "\033[1;94m[10]\033[0m Add Review" << endl;
-        cout << "\033[1;94m[11]\033[0m Save & Exit" << endl;
+        cout << "\033[1;94m[11]\033[0m Serach Review by Word" << endl;
+        cout << "\033[1;94m[12]\033[0m Save & Exit" << endl;
         cout << "\033[1;95m================================================================\033[0m" << endl;
 
         cout << "\nEnter your choice: ";
@@ -1256,6 +1296,7 @@ int main(){
 
             // Add new review
             case 10:
+            {
                 cout << endl;
 
                 // Call Function
@@ -1289,8 +1330,21 @@ int main(){
                 // Call function to update the membership category based on the latest points
                 updateMembershipCategory(user_id, membership_category, current_points, num_user, copy_membership_category, user_name);
                 break;
+            }
 
-                // Call Function to perform Additional Features
+            // Serach review by word
+            case 11:
+            {
+                string keyword;
+                cout << "Enter keyword to search: ";
+                getline(cin, keyword);
+
+                keyword = toLower(keyword); // Call function to lowercase the entered keyword
+
+                // Call function to search review by word
+                searchReviewByWord(num_review,num_user, keyword, review_statement, user_id, review_user_id, user_name, review_hotel_name, review_rating);
+                break;
+            }
         }       
     }
 
