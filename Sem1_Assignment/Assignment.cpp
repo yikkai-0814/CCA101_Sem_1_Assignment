@@ -1296,7 +1296,7 @@ int main(){
 
             // Add new review
             case 10:
-            {
+            {   // Put curly braces as there is variable declare inside the case
                 cout << endl;
 
                 // Call Function
@@ -1334,7 +1334,7 @@ int main(){
 
             // Serach review by word
             case 11:
-            {
+            {   // Put curly braces as there is variable declare inside the case
                 string keyword;
                 cout << "Enter keyword to search: ";
                 getline(cin, keyword);
