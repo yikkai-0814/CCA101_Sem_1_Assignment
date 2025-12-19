@@ -590,6 +590,7 @@ void innerDisplayUsersByMembership(string user_id[], string user_name[], string 
 void displayUsersByMembership(string user_id[], string user_name[], string membership_category[], int current_points[], int num_user){
 
     int choice;
+    double choice_double;
     bool choice_status = false;
     
     while(choice_status == false){ // Input Data Validation
@@ -598,8 +599,9 @@ void displayUsersByMembership(string user_id[], string user_name[], string membe
         cout << "\033[1;95m" << "===========================\n" << "\033[0m";
         cout << "\033[1;94m" << "1. Ascending Order\n2. Descending Order\n" << "\033[0m";
         cout << "\nEnter your choice: ";
-        cin >> choice;
+        cin >> choice_double; // Read the entered value as double to make the choice always an int
         cin.ignore(); // flush the buffer
+        choice = choice_double; // Convert the choice from double to int
 
         if (choice == 1 || choice == 2){
             choice_status = true;
@@ -805,6 +807,7 @@ void displayTop3Reviewer(int num_user, int count_review[], string user_id[], str
 void displayHotelRatingSummary(int num_hotel, string hotel_name[], int number_review_hotel[], int total_rating_hotel[]){
 
     int choice;
+    double choice_double;
     bool choice_status = false;
 
     while(choice_status == false){ // Input Data Validation
@@ -813,8 +816,9 @@ void displayHotelRatingSummary(int num_hotel, string hotel_name[], int number_re
         cout << "\033[1;95m" << "===========================\n" << "\033[0m";               // Display text in purple and reset it to default at the end
         cout << "\033[1;94m" << "1. Ascending Order\n2. Descending Order\n" << "\033[0m";   // Display text in blue and reset it to default at the end
         cout << "\nEnter your choice: ";
-        cin >> choice;
+        cin >> choice_double; // Read the entered value as double to make the choice always an int
         cin.ignore(); // flush the buffer
+        choice = choice_double; // Convert the choice from double to int
 
         if (choice == 1 || choice == 2){
         choice_status = true;
@@ -933,7 +937,7 @@ int addNewReview(int num_review, int num_user, string review_user_id[], string u
     cout << "Enter Review Statement: ";
     getline(cin, input_statement);
 
-    // Assign the rating to double first
+    // Read the rating as double first to make the rating always a int
     cout << "Enter Rating (1-5): ";
     cin >> input_rating; 
     cin.ignore(); // Flush the buffer
@@ -1152,6 +1156,7 @@ int main(){
 
     // Create menu-driven interface
     // Declare variables used for output features
+    double choice_double;
     int choice = 0; 
     string input_user_id , input_hotel_name;
 
@@ -1175,15 +1180,17 @@ int main(){
         cout << "\033[1;95m================================================================\033[0m" << endl;
 
         cout << "\nEnter your choice: ";
-        cin >> choice; 
+        cin >> choice_double; // Read the entered value as double to make the choice always an int
         cin.ignore(); // Flush the buffer
+        choice = choice_double; // Convert the choice from double to int
     
         // Input Data Validation
         while (choice > 12){
             cout << "\033[1;91m\nInvalid Choice!\n\n\033[0m"; // Display message in red colour and reset it to default at the end
             cout << "Enter your choice: ";
-            cin >> choice; 
+            cin >> choice_double; // Read the entered value as double to make the choice always an int
             cin.ignore(); // Flush the buffer
+            choice = choice_double; // Convert the choice from double to int
         }
 
         switch(choice){
