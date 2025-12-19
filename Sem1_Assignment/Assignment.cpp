@@ -896,7 +896,7 @@ int addNewReview(int num_review, int num_user, string review_user_id[], string u
     string input_user_id;
     string input_hotel_name;
     string input_statement;
-    int input_rating;
+    double input_rating;
 
     cout << "Enter UserID: ";
     cin >> input_user_id;
@@ -933,9 +933,9 @@ int addNewReview(int num_review, int num_user, string review_user_id[], string u
     cout << "Enter Review Statement: ";
     getline(cin, input_statement);
 
-    // Assume the rating only accept integer
+    // Assign the rating to double first
     cout << "Enter Rating (1-5): ";
-    cin >> input_rating;
+    cin >> input_rating; 
     cin.ignore(); // Flush the buffer
 
     // Input Data Validation for Rating
@@ -952,7 +952,7 @@ int addNewReview(int num_review, int num_user, string review_user_id[], string u
         review_user_id[num_review] = input_user_id;
         review_hotel_name[num_review] = input_hotel_name;
         review_statement[num_review] = input_statement;
-        review_rating[num_review] = input_rating;
+        review_rating[num_review] = input_rating; // change rating from double to int
         num_review++;
     }
 
