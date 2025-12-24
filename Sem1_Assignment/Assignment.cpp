@@ -164,7 +164,7 @@ void updateMembershipCategory(string user_id[], string membership_category[], in
     // Display message when a user change from one category to another
     if (membership_update == true){
         
-        cout << "\033[1;96m\n========================== Membership Upgrades ===========================\033[0m" << endl << endl; // Display text in cyan colour and reset it to default at the end
+        cout << "\033[1;96m\n============================= Membership Upgrades ===============================\033[0m" << endl << endl; // Display text in cyan colour and reset it to default at the end
 
         cout << "\033[1;93m"; // Display header in yellow colour and reset it to default at the end
         cout << left
@@ -525,9 +525,9 @@ void displayHighRatingReview(string input_hotel_name, string review_hotel_name[]
 // Create function to display summary of activities
 void displaySummaryActivities(int num_user, int num_review, int total_points_awarded){
     cout << left;
-    cout << "\033[1;92m" << setw(35) << "Total number of users" << ": " << "\033[0m" << num_user << endl;
-    cout << "\033[1;92m" << setw(35) << "Total number of reviews" << ": " << "\033[0m" << num_review << endl;
-    cout << "\033[1;92m" << setw(35) << "Total points awarded system-wide" << ": " << "\033[0m" << total_points_awarded << endl;
+    cout << "\033[1;33m" << setw(35) << "Total number of users" << ": " << "\033[0m" << num_user << endl; // Display text in yellow colour and reset it to default at the end
+    cout << "\033[1;33m" << setw(35) << "Total number of reviews" << ": " << "\033[0m" << num_review << endl; // Display text in yellow colour and reset it to default at the end
+    cout << "\033[1;33m" << setw(35) << "Total points awarded system-wide" << ": " << "\033[0m" << total_points_awarded << endl; // Display text in yellow colour and reset it to default at the end
 }
 
 // Create function that used for display specific membership category members
