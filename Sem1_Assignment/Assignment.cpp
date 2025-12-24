@@ -806,19 +806,19 @@ void displayTop3Reviewer(int num_user, int count_review[], string user_id[], str
 // Create function to display hotel rating summary
 void displayHotelRatingSummary(int num_hotel, string hotel_name[], int number_review_hotel[], int total_rating_hotel[]){
 
-    int choice;
-    double choice_double;
-    bool choice_status = false;
+    int choice, choice_sort;
+    double choice_sort_by;
+    bool choice_status = false, choice_sort_status = false;
 
     while(choice_status == false){ // Input Data Validation
         cout << "\033[1;95m" << "\n===========================\n" << "\033[0m";             // Display text in purple and reset it to default at the end
         cout << "\033[1;94m" << "   Sorting Features Menu\n" << "\033[0m";                  // Display text in blue and reset it to default at the end
         cout << "\033[1;95m" << "===========================\n" << "\033[0m";               // Display text in purple and reset it to default at the end
-        cout << "\033[1;94m" << "1. Ascending Order\n2. Descending Order\n" << "\033[0m";   // Display text in blue and reset it to default at the end
+        cout << "\033[1;94m" << "1. Sort by Number of Review\n2. Sort by Rating\n" << "\033[0m";   // Display text in blue and reset it to default at the end
         cout << "\nEnter your choice: ";
-        cin >> choice_double; // Read the entered value as double to make the choice always an int
+        cin >> choice_sort_by; // Read the entered value as double to make the choice always an int
         cin.ignore(); // flush the buffer
-        choice = choice_double; // Convert the choice from double to int
+        choice = choice_sort_by; // Convert the choice from double to int
 
         if (choice == 1 || choice == 2){
         choice_status = true;
@@ -828,30 +828,81 @@ void displayHotelRatingSummary(int num_hotel, string hotel_name[], int number_re
         }
     }
 
-    // Sort hotel in ascending order 
+    while(choice_sort_status == false){ // Input Data Validation
+        cout << "\033[1;95m" << "\n===========================\n" << "\033[0m";             // Display text in purple and reset it to default at the end
+        cout << "\033[1;94m" << "   Sorting Features Menu\n" << "\033[0m";                  // Display text in blue and reset it to default at the end
+        cout << "\033[1;95m" << "===========================\n" << "\033[0m";               // Display text in purple and reset it to default at the end
+        cout << "\033[1;94m" << "1. Ascending Order\n2. Descending Order\n" << "\033[0m";   // Display text in blue and reset it to default at the end
+        cout << "\nEnter your choice: ";
+        cin >> choice_sort_by; // Read the entered value as double to make the choice always an int
+        cin.ignore(); // flush the buffer
+        choice_sort = choice_sort_by; // Convert the choice from double to int
+
+        if (choice_sort == 1 || choice_sort == 2){
+        choice_sort_status = true;
+        }
+        else{
+            cout << "\033[1;91m" << "\nInvalid Choice! Please make input again!\n\033[0m"; // Display text in red colour and reset it to default at the end
+        }
+    }
+
+    // Sort hotel based on number of review
     if (choice == 1){
-        for (int i=0; i< num_hotel-1; i++){
-            for (int j=i+1; j<num_hotel; j++){
-                if (number_review_hotel[j] < number_review_hotel[i]){
-                    swap (hotel_name[j], hotel_name[i]);
-                    swap (number_review_hotel[j], number_review_hotel[i]);
-                    swap (total_rating_hotel[j], total_rating_hotel[i]);
+        // Sort hotel in ascending order 
+        if (choice_sort == 1){
+            for (int i=0; i< num_hotel-1; i++){
+                for (int j=i+1; j<num_hotel; j++){
+                    if (number_review_hotel[j] < number_review_hotel[i]){
+                        swap (hotel_name[j], hotel_name[i]);
+                        swap (number_review_hotel[j], number_review_hotel[i]);
+                        swap (total_rating_hotel[j], total_rating_hotel[i]);
+                    }
+                }
+            }
+        }
+        // Sort hotel in descending order
+        else{
+            for (int i=0; i< num_hotel-1; i++){
+                for (int j=i+1; j<num_hotel; j++){
+                    if (number_review_hotel[j] > number_review_hotel[i]){
+                        swap (hotel_name[j], hotel_name[i]);
+                        swap (number_review_hotel[j], number_review_hotel[i]);
+                        swap (total_rating_hotel[j], total_rating_hotel[i]);
+                    }
                 }
             }
         }
     }
-    // Sort hotel in descending order
-    else if(choice == 2){
-        for (int i=0; i< num_hotel-1; i++){
-            for (int j=i+1; j<num_hotel; j++){
-                if (number_review_hotel[j] > number_review_hotel[i]){
-                    swap (hotel_name[j], hotel_name[i]);
-                    swap (number_review_hotel[j], number_review_hotel[i]);
-                    swap (total_rating_hotel[j], total_rating_hotel[i]);
+    // Sort hotel based on rating
+    else{
+        // Sort hotel in ascending order 
+        if (choice_sort == 1){
+            for (int i=0; i< num_hotel-1; i++){
+                for (int j=i+1; j<num_hotel; j++){
+                    if ((static_cast<double>(total_rating_hotel[j]) / static_cast<double>(number_review_hotel[j])) < (static_cast<double>(total_rating_hotel[i]) / static_cast<double>(number_review_hotel[i]))){
+                        swap (hotel_name[j], hotel_name[i]);
+                        swap (number_review_hotel[j], number_review_hotel[i]);
+                        swap (total_rating_hotel[j], total_rating_hotel[i]);
+                    }
+                }
+            }
+        }
+        // Sort hotel in descending order
+        else{
+            for (int i=0; i< num_hotel-1; i++){
+                for (int j=i+1; j<num_hotel; j++){
+                    if ((static_cast<double>(total_rating_hotel[j]) / static_cast<double>(number_review_hotel[j])) > (static_cast<double>(total_rating_hotel[i]) / static_cast<double>(number_review_hotel[i]))){
+                        swap (hotel_name[j], hotel_name[i]);
+                        swap (number_review_hotel[j], number_review_hotel[i]);
+                        swap (total_rating_hotel[j], total_rating_hotel[i]);
+                    }
                 }
             }
         }
     }
+
+
+    
 
     // Dislay Header in blue
     cout << "\033[1;94m";
