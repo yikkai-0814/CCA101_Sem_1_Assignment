@@ -1,4 +1,4 @@
-U001	Alice Morgan	Orange	California	alice.morgan@yahoo.com	Platinum	10000
+U001	Alice Morgan	Orange	California	alice.morgan@yahoo.com	Gold	9900
 U002	Brian Chen	King	Washington	brian.chen@aol.com	Silver	3500
 U003	Sandra Lee	Clark	Nevada	sandra.lee@yahoo.com	Platinum	13150
 U004	Darren Low	Penang	Penang	darren.low@botmail.com	Silver	4200
