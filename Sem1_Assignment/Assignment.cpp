@@ -1279,7 +1279,7 @@ int main(){
                     cout << "\033[1;93m" << "[" <<  i + 1 << "] "  << hotel_name[i] << "\033[0m" << endl;
                 }
 
-                cout << endl << "Enter your choice: "; // Prompt user to make input
+                cout << endl << "Enter your hotel choice: "; // Prompt user to make input
                 cin >> choice_hotel_double; // Read the entered value as double to make the choice always an int
                 cin.ignore();   // Flush the buffer
                 choice_hotel = choice_hotel_double - 1; // Convert the choice from double to int
@@ -1311,7 +1311,7 @@ int main(){
                     cout << "\033[1;93m" << "[" <<  i + 1 << "] "  << hotel_name[i] << "\033[0m" << endl;
                 }
                 
-                cout << endl << "Enter your choice: "; // Prompt user to make input
+                cout << endl << "Enter your hotel choice: "; // Prompt user to make input
                 cin >> choice_hotel_double; // Read the entered value as double to make the choice always an int
                 cin.ignore();   // Flush the buffer
                 choice_hotel = choice_hotel_double - 1; // Convert the choice from double to int
