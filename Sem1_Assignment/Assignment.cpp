@@ -1246,7 +1246,7 @@ int main(){
         choice = choice_double; // Convert the choice from double to int
     
         // Input Data Validation
-        while (choice > 12){
+        while (choice < 1 || choice > 12){
             cout << "\033[1;91m\nInvalid Choice!\n\n\033[0m"; // Display message in red colour and reset it to default at the end
             cout << "Enter your choice: ";
             cin >> choice_double; // Read the entered value as double to make the choice always an int
