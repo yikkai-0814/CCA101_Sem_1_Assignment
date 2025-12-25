@@ -348,7 +348,7 @@ void displaySpecificUserReview(string user_id[], string user_name[], string revi
 }
 
 // Create function to display review for a specific hotel
-void displaySpecificHotelReview(string input_hotel_name, string review_hotel_name[], string review_user_id[], int review_rating[], 
+void displaySpecificHotelReview(int hotel_choice, string review_hotel_name[], string review_user_id[], int review_rating[], 
     string review_statement[], string user_name[], string user_id[], int number_review, int num_user, int number_hotel, string hotel_name[]){
 
     bool review_status = false;
@@ -359,13 +359,13 @@ void displaySpecificHotelReview(string input_hotel_name, string review_hotel_nam
         for (int j=0; j<number_hotel; j++){
 
             // Check the validity of hotel
-            if (input_hotel_name == hotel_name[j]){ 
+            if (hotel_name[hotel_choice] == hotel_name[j]){ 
                 hotel_status = true;
             }
         }
 
         // Check whether there is a review made to this hotel
-        if (input_hotel_name == review_hotel_name[i]){ 
+        if (hotel_name[hotel_choice] == review_hotel_name[i]){ 
             review_status = true;
         }
     }
@@ -380,7 +380,7 @@ void displaySpecificHotelReview(string input_hotel_name, string review_hotel_nam
         for (int i=0 ;i<number_review; i++){
 
 
-            if (input_hotel_name == review_hotel_name[i]){
+            if (hotel_name[hotel_choice] == review_hotel_name[i]){
 
                 // Call function to find username based on review user id
                 username = findUsername(num_user, user_name, review_user_id[i], user_id, username);
@@ -404,11 +404,11 @@ void displaySpecificHotelReview(string input_hotel_name, string review_hotel_nam
     
     // Display appropriate message when the input hotel name is not in the list of hotel
     if (hotel_status == false){
-        cout << "\033[1;91m" << "Hotel is not found! Please use the hotel name listed above!\n" << "\033[0m" ; // Display message in red color and reset it to default at the end
+        cout << "\033[1;91m" << "\nHotel is not found! Please use the hotel name listed above!\n" << "\033[0m" ; // Display message in red color and reset it to default at the end
     }
     else{
         if(review_status == false){
-            cout << "\033[1;91m" << "No review is made to this hotel!\n" << "\033[0m"; // Display message in red color and reset it to default at the end
+            cout << "\033[1;91m" << "\nNo review is made to this hotel!\n" << "\033[0m"; // Display message in red color and reset it to default at the end
         }
     }
 }
@@ -469,19 +469,29 @@ void displayUserLatestInfo(string user_id[], string user_name[], string country[
 }
 
 // Create function to display review of high rating 4 or 5 for specific hotel 
-void displayHighRatingReview(string input_hotel_name, string review_hotel_name[], string review_user_id[], int review_rating[], string review_statement[], 
-    string user_id[], string user_name[], int num_user, int num_review){
+void displayHighRatingReview(int hotel_choice, string review_hotel_name[], string review_user_id[], int review_rating[], string review_statement[], 
+    string user_id[], string user_name[], int num_user, int number_review, int number_hotel, string hotel_name[]){
     
     bool review_status = false;
+    bool hotel_status = false;
 
-    for (int i=0; i<num_review; i++){
+    for (int i=0; i<number_review; i++){
 
-        if(input_hotel_name == review_hotel_name[i]){
+        for (int j=0; j<number_hotel; j++){
+
+            // Check the validity of hotel
+            if (hotel_name[hotel_choice] == hotel_name[j]){ 
+                hotel_status = true;
+            }
+        }
+
+        // Check whether there is a review made to this hotel
+        if (hotel_name[hotel_choice] == review_hotel_name[i]){ 
             
-            // Find whether there is review that contain rating more than 4 for a specific hotel
             if (review_rating[i] >= 4){
-                
-                review_status = true;
+
+            review_status = true;
+
             }
         }
     }
@@ -492,9 +502,9 @@ void displayHighRatingReview(string input_hotel_name, string review_hotel_name[]
         int count = 1;
 
         // Create loop to display review of a specific hotel
-        for (int i=0; i<num_review; i++){
+        for (int i=0; i<number_review; i++){
 
-            if(input_hotel_name == review_hotel_name[i]){
+            if(hotel_name[hotel_choice] == review_hotel_name[i]){
                 
                 if (review_rating[i] >= 4){
                     
@@ -518,7 +528,7 @@ void displayHighRatingReview(string input_hotel_name, string review_hotel_name[]
     }
     // Display appropriate message if there is no review with rating 4 or 5 for this hotel
     else{ 
-        cout << "\033[1;91mThere is no high rating review for " << input_hotel_name << ".\033[0m"; // Display message in red colour and reset it to default at the end
+        cout << "\033[1;91m\nThere is no high rating review for " << hotel_name[hotel_choice] << ".\033[0m"; // Display message in red colour and reset it to default at the end
     }
 }
 
@@ -828,7 +838,7 @@ void displayHotelRatingSummary(int num_hotel, string hotel_name[], int number_re
         }
     }
 
-    while(choice_sort_status == false){ // Input Data Validation
+    while(choice_status == true && choice_sort_status == false){ // Input Data Validation
         cout << "\033[1;95m" << "\n===========================\n" << "\033[0m";             // Display text in purple and reset it to default at the end
         cout << "\033[1;94m" << "   Sorting Features Menu\n" << "\033[0m";                  // Display text in blue and reset it to default at the end
         cout << "\033[1;95m" << "===========================\n" << "\033[0m";               // Display text in purple and reset it to default at the end
@@ -1259,6 +1269,9 @@ int main(){
 
             // Display All Reviews for a specific hotel 
             case 2:
+            {   // Put curly braces as there is variable declared inside the case
+                int choice_hotel;
+                double choice_hotel_double;
 
                 // Display Available Hotel 
                 cout << endl << "\033[1;91m" <<  "Available Hotel List: \n" << "\033[0m" << endl;
@@ -1266,12 +1279,15 @@ int main(){
                     cout << "\033[1;93m" << "[" <<  i + 1 << "] "  << hotel_name[i] << "\033[0m" << endl;
                 }
 
-                cout << endl << "Enter the name of hotel: "; // Prompt user to make input
-                getline(cin, input_hotel_name);
+                cout << endl << "Enter your choice: "; // Prompt user to make input
+                cin >> choice_hotel_double; // Read the entered value as double to make the choice always an int
+                cin.ignore();   // Flush the buffer
+                choice_hotel = choice_hotel_double - 1; // Convert the choice from double to int
 
                 // Call Function
-                displaySpecificHotelReview(input_hotel_name, review_hotel_name, review_user_id, review_rating, review_statement, user_name, user_id, num_review, num_user, number_hotel, hotel_name);
+                displaySpecificHotelReview(choice_hotel, review_hotel_name, review_user_id, review_rating, review_statement, user_name, user_id, num_review, num_user, number_hotel, hotel_name);
                 break;
+            }
 
             // Display updated user information
             case 3:
@@ -1284,19 +1300,26 @@ int main(){
 
             // Display All reviews with rating 4 or 5 for a specific hotel
             case 4:
-
+            {   // Put curly braces as there is variable declared inside the case
+                
+                int choice_hotel;
+                double choice_hotel_double;
+                
                 // Display Available Hotel 
                 cout << endl << "\033[1;91m" <<  "Available Hotel List: \n" << "\033[0m" << endl;
                 for (int i=0; i<number_hotel; i++){
                     cout << "\033[1;93m" << "[" <<  i + 1 << "] "  << hotel_name[i] << "\033[0m" << endl;
                 }
                 
-                cout << endl << "Enter the name of hotel: ";
-                getline(cin, input_hotel_name);
+                cout << endl << "Enter your choice: "; // Prompt user to make input
+                cin >> choice_hotel_double; // Read the entered value as double to make the choice always an int
+                cin.ignore();   // Flush the buffer
+                choice_hotel = choice_hotel_double - 1; // Convert the choice from double to int
 
                 // Call Function
-                displayHighRatingReview(input_hotel_name, review_hotel_name, review_user_id, review_rating, review_statement, user_id, user_name, num_user, num_review);
+                displayHighRatingReview(choice_hotel, review_hotel_name, review_user_id, review_rating, review_statement, user_id, user_name, num_user, num_review, number_hotel, hotel_name);
                 break;
+            }
 
             // Display Summary of Activities
             case 5:

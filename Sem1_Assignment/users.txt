@@ -1,20 +1,20 @@
-U001	Alice Morgan	Orange	California	alice.morgan@yahoo.com	Gold	9900
-U002	Brian Chen	King	Washington	brian.chen@aol.com	Silver	3400
-U003	Sandra Lee	Clark	Nevada	sandra.lee@yahoo.com	Platinum	13050
-U004	Darren Low	Penang	Penang	darren.low@botmail.com	Silver	4100
-U005	Nur Aisha	Sepang	Selangor	aisha.nur@hotmail.com	Gold	7800
-U006	Hiro Tanaka	Osaka	Kansai	hiro.tanaka@mail.com	Silver	2400
-U007	Maria Gutierrez	Travis	Texas	m.gutierrez@example.com	Platinum	15700
-U008	John Peterson	Cook	Illinois	john.p@hotmail.com	Gold	6000
-U009	Lim Wei Jian	Johor Bahru	Johor	wj.lim@example.com	Silver	2900
-U010	Kavita Sharma	Mumbai	Maharashtra	kavita.sharma@yahoo.com	Gold	7400
-U011	Fiona Khalid	Gombak	Selangor	fiona.khalid@example.com	Silver	2200
-U012	Owen Riley	Maricopa	Arizona	owen.r@exhotmailample.com	Gold	5700
-U013	Chen Mei Lin	Tainan	Taiwan	meilin.chen@example.com	Silver	2500
-U014	James Walker	Miami-Dade	Florida	j.walker@aol.com	Platinum	10800
-U015	Siti Farah	Kota Kinabalu	Sabah	farah.s@example.com	Silver	2000
-U016	Carlos Ruiz	San Diego	California	carlos.r@yahoo.com	Gold	6400
-U017	Emily Johnson	Fulton	Georgia	emily.j@example.com	Silver	3350
-U018	Rahul Nair	Ernakulam	Kerala	rahul.nair@gmail.com	Gold	7500
-U019	Tan Jing Yi	Seremban	Negeri Sembilan	jingyi.tan@aol.com	Silver	2700
-U020	Adrian Yong	Kuching	Sarawak	adrian.y@aol.com	Platinum	13800
+U001	Alice Morgan	Orange	California	alice.morgan@yahoo.com	Platinum	10000
+U002	Brian Chen	King	Washington	brian.chen@aol.com	Silver	3500
+U003	Sandra Lee	Clark	Nevada	sandra.lee@yahoo.com	Platinum	13150
+U004	Darren Low	Penang	Penang	darren.low@botmail.com	Silver	4200
+U005	Nur Aisha	Sepang	Selangor	aisha.nur@hotmail.com	Gold	7900
+U006	Hiro Tanaka	Osaka	Kansai	hiro.tanaka@mail.com	Silver	2500
+U007	Maria Gutierrez	Travis	Texas	m.gutierrez@example.com	Platinum	15800
+U008	John Peterson	Cook	Illinois	john.p@hotmail.com	Gold	6100
+U009	Lim Wei Jian	Johor Bahru	Johor	wj.lim@example.com	Silver	3000
+U010	Kavita Sharma	Mumbai	Maharashtra	kavita.sharma@yahoo.com	Gold	7500
+U011	Fiona Khalid	Gombak	Selangor	fiona.khalid@example.com	Silver	2300
+U012	Owen Riley	Maricopa	Arizona	owen.r@exhotmailample.com	Gold	5800
+U013	Chen Mei Lin	Tainan	Taiwan	meilin.chen@example.com	Silver	2600
+U014	James Walker	Miami-Dade	Florida	j.walker@aol.com	Platinum	10900
+U015	Siti Farah	Kota Kinabalu	Sabah	farah.s@example.com	Silver	2100
+U016	Carlos Ruiz	San Diego	California	carlos.r@yahoo.com	Gold	6500
+U017	Emily Johnson	Fulton	Georgia	emily.j@example.com	Silver	3450
+U018	Rahul Nair	Ernakulam	Kerala	rahul.nair@gmail.com	Gold	7600
+U019	Tan Jing Yi	Seremban	Negeri Sembilan	jingyi.tan@aol.com	Silver	2800
+U020	Adrian Yong	Kuching	Sarawak	adrian.y@aol.com	Platinum	13900
