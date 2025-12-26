@@ -592,7 +592,7 @@ void innerDisplayUsersByMembership(string user_id[], string user_name[], string 
     // Display appropriate message when there is no member in this category
     else{
         cout << endl << "\033[1;96m" << target_category << " Member\n\033[0m";
-        cout << "\033[1;91m" << "No user is found in this membership category.\n" << "\033[0m"; // Dispaly message in red colour and reset it to default at the end
+        cout << "\033[1;91m" << "|      No users found in this category.         |\n" << "\033[0m"; // Dispaly message in red colour and reset it to default at the end
     }
 }
 
