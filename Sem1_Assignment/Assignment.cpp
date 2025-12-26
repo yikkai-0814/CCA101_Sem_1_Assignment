@@ -6,7 +6,7 @@
 
 using namespace std;
 
-// Declare global variables
+// Declare constant global variables
 const int MAX_USERS = 100;
 const int MAX_REVIEWS = 100;
 
