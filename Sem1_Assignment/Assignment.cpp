@@ -1209,7 +1209,7 @@ int main(){
     string copy_user_id[MAX_USERS], 
     copy_user_name[MAX_USERS],
     sort_membership_category[MAX_USERS],
-    copy_hotel_name[MAX_USERS];
+    copy_hotel_name[MAX_REVIEWS];
 
     int copy_current_points[MAX_USERS],
     copy_number_review_hotel[MAX_REVIEWS],
@@ -1219,7 +1219,7 @@ int main(){
     // Declare variables used for output features
     double choice_double;
     int choice = 0; 
-    string input_user_id , input_hotel_name;
+    string input_user_id;
 
     // Input Data Validation
     while (choice != 12){
