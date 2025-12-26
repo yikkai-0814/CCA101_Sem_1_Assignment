@@ -1,1 +1,1 @@
-displayUsersByMembership
+displayHotelRatingSummary
