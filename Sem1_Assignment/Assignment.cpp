@@ -1225,7 +1225,7 @@ int main(){
     while (choice != 12){
 
         // Display Header
-        cout << "\033[1;95m\n====================== TRAVELGO MAIN MENU ======================\033[0m" << endl;
+        cout << "\033[1;96m\n====================== TRAVELGO MAIN MENU ======================\033[0m" << endl;
         cout << "\033[1;94m[1]\033[0m  Display User Reviews" << endl;
         cout << "\033[1;94m[2]\033[0m  Display Hotel Reviews" << endl;
         cout << "\033[1;94m[3]\033[0m  User Information" << endl;
@@ -1238,7 +1238,7 @@ int main(){
         cout << "\033[1;94m[10]\033[0m Add Review" << endl;
         cout << "\033[1;94m[11]\033[0m Serach Review by Word" << endl;
         cout << "\033[1;94m[12]\033[0m Save & Exit" << endl;
-        cout << "\033[1;95m================================================================\033[0m" << endl;
+        cout << "\033[1;96m================================================================\033[0m" << endl;
 
         cout << "\nEnter your choice: ";
         cin >> choice_double; // Read the entered value as double to make the choice always an int
