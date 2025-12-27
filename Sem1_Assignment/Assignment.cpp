@@ -1456,6 +1456,6 @@ int main(){
     // Call function to update review.txt
     updateReviewFile(num_review, review_user_id, review_rating, review_statement, review_hotel_name);
 
-    cout << "\033[1;93m" << "\n\nThank you for using this system!\n" << "\033[0m"; // Display message in yellow and reset it at the end
+    cout << "\033[1;93m" << "\n\nThank you for using TravelGo system! Goodbye.\n" << "\033[0m"; // Display message in yellow and reset it at the end
     return 0;
 }
