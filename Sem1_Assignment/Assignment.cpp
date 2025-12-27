@@ -337,7 +337,7 @@ void displaySpecificUserReview(string user_id[], string user_name[], string revi
 
     // Display appropriate message when the user is not found
     if (user_status == false){
-        cout << "\033[1;91m" << "User is not found!\n" << "\033[0m";  // Display message in red color and reset it to default at the end
+        cout << "\033[1;91m" << "User not found!\n" << "\033[0m";  // Display message in red color and reset it to default at the end
     }
     else{ 
         // Display appropriate message when no review is made by the user
