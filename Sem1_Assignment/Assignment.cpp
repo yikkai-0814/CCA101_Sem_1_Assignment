@@ -532,7 +532,7 @@ void displayHighRatingReview(int hotel_choice, string review_hotel_name[], strin
         cout << "\033[1;91m" << "\nHotel not found! Please use the hotel listed above!\n" << "\033[0m" ; // Display message in red color and reset it to default at the end
     }
     // Display appropriate message if there is no review with rating 4 or 5 for this hotel
-    else{
+    else if (review_status == false){
         cout << "\033[1;91m\nThere is no high rating review for " << hotel_name[hotel_choice] << ".\033[0m"; // Display message in red colour and reset it to default at the end
     }
 }
@@ -1009,7 +1009,7 @@ int addNewReview(int num_review, int num_user, string review_user_id[], string u
     cin.ignore(); // Flush the buffer
 
     // Input Data Validation for Rating
-    while (input_rating < 0 || input_rating > 5){
+    while (input_rating < 1 || input_rating > 5){
         cout << "\033[1;91m" << "\nInvalid Input for rating! Rating must be between 1 and 5.\n\n" << "\033[0m"; // Display message in red colours and reset it at the end
         cout << "Enter Rating (1-5): ";
         cin >> input_rating;
