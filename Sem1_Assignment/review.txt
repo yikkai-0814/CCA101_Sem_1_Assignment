@@ -1,6 +1,6 @@
 U001	5	Great service and clean room	Sunrise Hotel
 U002	3	Average, nothing special	Maple Stay
-U003	4	Comfortable and quiet	Royal Palace
+U002	4	Comfortable and quiet	Royal Palace
 U004	5	Staff very friendly	Ocean Dream Resort
 U005	2	Room too small	Sunrise Hotel
 U006	5	Excellent food	Hotel Sakura

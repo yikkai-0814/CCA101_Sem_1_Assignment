@@ -526,6 +526,11 @@ void displayHighRatingReview(int hotel_choice, string review_hotel_name[], strin
             }
         }
     }
+
+    // Display appropriate message when the input hotel name is not in the list of hotel
+    if (hotel_status == false){
+        cout << "\033[1;91m" << "\nHotel not found! Please use the hotel listed above!\n" << "\033[0m" ; // Display message in red color and reset it to default at the end
+    }
     // Display appropriate message if there is no review with rating 4 or 5 for this hotel
     else{
         cout << "\033[1;91m\nThere is no high rating review for " << hotel_name[hotel_choice] << ".\033[0m"; // Display message in red colour and reset it to default at the end
